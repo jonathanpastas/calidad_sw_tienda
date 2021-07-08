@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="/">Tienda de Ropa</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                            <li class="nav-item"><a class="nav-link" href="about.html">Productos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="contact.html">Conctactos</a></li>
+
+
+
+                        </ul>
+                    </div>
+                </div>
+  </nav>
+
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+
+<div class="row align-items-start">
+    <div class="col">
+      <img src="/static/img/login.jpg" class="img-fluid" alt="logo">
+    </div>
+
+    <div class="col">
+          <!-- Formulario de login columna 2  -->
+        <form method="POST" action="ingresar"  onsubmit="return enviar3()">
+                <div class="form-group">
+                    <label for="correo">Correo Electronico</label>
+
+                    <input type="email" class="form-control" id="correo" name="correo" aria-describedby="emailHelp" placeholder="Ejm:ejemplo@ejemplo.com" required>
+                    <small id="emailHelp" class="form-text text-muted">Ingrese su Correo Electronico</small>
+                </div>
+                <div class="form-group">
+                    <label for="clave">Contraseña </label>
+                    <input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" required>
+                </div>
+                    <br>
+                  <br>
+                 <button type="submit" class="btn btn-primary">Ingresar</button>
+         </form>
+
+
+
+            <!-- Fin de Formulario de login columna 2  -->
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+{% endblock %}
+
+
+
