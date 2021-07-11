@@ -7,6 +7,7 @@ db = pymysql.connect(
     db='3LuICOPYq0',
 )
 
+db.ping()
 
 def queryDatos(user, contra):
     sql = "SELECT * FROM clientes WHERE correo='"+str(user)+"'"

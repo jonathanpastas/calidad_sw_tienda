@@ -17,16 +17,13 @@ def index() -> 'html':
 def login() -> 'html':
     return render_template('login.html', titulo='Iniciar Sesión')
 
+#Metodo para Ingresar a la Sesion,Valida el Cliente
+
 @app.route('/ingresar' ,methods=['POST'])
 def ingreso() -> 'html':
   user=request.form['correo']
   clave = request.form['clave']
   validar=queryDatos(user,clave)
-  #print(validar)
-
-  #print(nombre)
-
-  #print(perfil)
 
   if validar == True:
       perfilu = perfiluser(user)
@@ -39,22 +36,30 @@ def ingreso() -> 'html':
       session['ci']=cedula
       return redirect(url_for('paginicio'))
   else :
-       flash("Error al Inciar Sesion. Por Favor Verifique sus Credenciales de Acceso")
+       flash("Correo Electronico o Contraseña no son correctos.")
        return  redirect(url_for('login'))
 
+#Metodo que redirige a la pagina de inicio del cliente
 @app.route('/inicio')
 def paginicio() -> 'html':
 
-    if 'username' in session :
+    if 'username' in session:
         print("true")
         #menu=menuopciones(str(session['perfiluser']))
         usuario=session['username']
         nom = str(session['nombre'])
-        return render_template('cliente.html')
+        return render_template('cliente.html',titulo="HomeSmart | Bienvenido")
 
 
     else :
         return redirect(url_for('index'))
+
+#Metodo para Cerrar la Sesion
+@app.route('/cerrarsesion')
+def salir() ->'html':
+    session.clear()
+    return redirect(url_for('index'))
+
 
 
 app.run(debug=True)
