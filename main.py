@@ -49,7 +49,7 @@ def paginicio() -> 'html':
         usuario=session['username']
         nom = str(session['nombre'])
         lista=listaproductosg()
-        return render_template('cliente.html',titulo="HomeSmart | Bienvenido",lstp=lista)
+        return render_template('cliente.html',titulo="HomeSmart | Bienvenido",lstp=lista,nomb=nom)
 
 
     else :

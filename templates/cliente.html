@@ -16,11 +16,22 @@
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            Mi Carrito
                         </button>
 
-                        <a class="btn btn-danger" href="/cerrarsesion" role="button">Cerrar Sesión</a>
+                        <li class="nav-item dropdown" style="list-style:none;">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ nomb }}
+                                </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/cerrarsesion">CERRAR SESION</a></li>
+
+                            </ul>
+                         </li>
+
+
+
+
 
                     </form>
                 </div>
@@ -30,7 +41,7 @@
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Bienvenido a HomeSmart</h1>
+                    <h1 class="display-4 fw-bolder">Bienvenido a HomeSmart : {{ nomb }}</h1>
                     <p class="lead fw-normal text-white-50 mb-0">La tienda ideal para convertir tu casa en una HomeSmart</p>
                 </div>
             </div>
