@@ -48,7 +48,8 @@ def paginicio() -> 'html':
         #menu=menuopciones(str(session['perfiluser']))
         usuario=session['username']
         nom = str(session['nombre'])
-        return render_template('cliente.html',titulo="HomeSmart | Bienvenido")
+        lista=listaproductosg()
+        return render_template('cliente.html',titulo="HomeSmart | Bienvenido",lstp=lista)
 
 
     else :

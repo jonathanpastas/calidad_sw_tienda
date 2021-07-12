@@ -7,9 +7,10 @@ db = pymysql.connect(
     db='3LuICOPYq0',
 )
 
-db.ping()
+
 
 def queryDatos(user, contra):
+    db.ping()
     sql = "SELECT * FROM clientes WHERE correo='"+str(user)+"'"
     cursor = db.cursor()
     cursor.execute(sql)
@@ -28,7 +29,7 @@ def queryDatos(user, contra):
 
 
 def perfiluser(user):
-
+    db.ping()
     dato=0
     sql = "SELECT * FROM clientes WHERE correo='"+str(user)+"'"
     cursor = db.cursor()
@@ -39,6 +40,7 @@ def perfiluser(user):
     return dato
 
 def nombreuser(user):
+    db.ping()
     sql = "SELECT * FROM clientes WHERE correo='" + str(user) + "'"
     cursor = db.cursor()
     cursor.execute(sql)
@@ -48,6 +50,7 @@ def nombreuser(user):
     return nombre
 
 def ciuser(user):
+    db.ping()
     sql = "SELECT * FROM clientes WHERE correo='" + str(user) + "'"
     cursor = db.cursor()
     cursor.execute(sql)
@@ -55,3 +58,12 @@ def ciuser(user):
     for row in data:
         ci = row[0]
     return ci
+
+def listaproductosg():
+    db.ping()
+    sql = "SELECT * FROM productos "
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+
+    return data
