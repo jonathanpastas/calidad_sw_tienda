@@ -1,6 +1,4 @@
 from flask import Flask, render_template ,request, session, redirect, url_for,flash
-
-
 from bdatos import *
 
 app = Flask(__name__)
@@ -59,6 +57,28 @@ def paginicio() -> 'html':
 def salir() ->'html':
     session.clear()
     return redirect(url_for('index'))
+
+
+@app.route('/producto',methods=['GET'])
+def mostrarprod()->'html':
+
+    if 'username' in session:
+        print("true")
+        #menu=menuopciones(str(session['perfiluser']))
+        usuario=session['username']
+        nom = str(session['nombre'])
+        prod = request.args.get('id')
+
+        datpro,cat=mostrarproducto(prod)
+        daca=mprodcat(cat,prod)
+        print(datpro)
+
+        return render_template('producto.html',titulo="HomeSmart | Bienvenido",nomb=nom,pr=datpro,pc=daca)
+
+
+    else :
+        return redirect(url_for('index'))
+
 
 
 

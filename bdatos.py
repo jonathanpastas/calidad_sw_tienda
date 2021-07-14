@@ -1,16 +1,11 @@
-import pymysql
+import psycopg2
 
-db = pymysql.connect(
-    host='localhost',
-    user='root',
-    password=None,
-    db='proyecto',
-)
+db = psycopg2.connect(host="localhost", database="proyecto", user="postgres", password="1234")
 
 
 
 def queryDatos(user, contra):
-    db.ping()
+
     sql = "SELECT * FROM clientes WHERE correo='"+str(user)+"'"
     cursor = db.cursor()
     cursor.execute(sql)
@@ -29,7 +24,7 @@ def queryDatos(user, contra):
 
 
 def perfiluser(user):
-    db.ping()
+
     dato=0
     sql = "SELECT * FROM clientes WHERE correo='"+str(user)+"'"
     cursor = db.cursor()
@@ -40,7 +35,7 @@ def perfiluser(user):
     return dato
 
 def nombreuser(user):
-    db.ping()
+
     sql = "SELECT * FROM clientes WHERE correo='" + str(user) + "'"
     cursor = db.cursor()
     cursor.execute(sql)
@@ -50,7 +45,7 @@ def nombreuser(user):
     return nombre
 
 def ciuser(user):
-    db.ping()
+
     sql = "SELECT * FROM clientes WHERE correo='" + str(user) + "'"
     cursor = db.cursor()
     cursor.execute(sql)
@@ -60,10 +55,37 @@ def ciuser(user):
     return ci
 
 def listaproductosg():
-    db.ping()
+
     sql = "SELECT * FROM productos "
     cursor = db.cursor()
     cursor.execute(sql)
     data = cursor.fetchall()
 
     return data
+
+def mostrarproducto(id):
+
+    sql = "select * from productos where id_producto="+id
+    print(sql)
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    print(data)
+
+    for row in data:
+        cat = row[5]
+
+
+    return data,cat
+
+def mprodcat(categoria,id):
+
+    sql = "select * from productos where tipo='" + str(categoria) + "' and id_producto<>"+id
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+
+    return data
+
+
+
