@@ -1,10 +1,10 @@
 import pymysql
 
 db = pymysql.connect(
-    host='remotemysql.com',
-    user='3LuICOPYq0',
-    password="Fh6aYfHmFi",
-    db='3LuICOPYq0',
+    host='localhost',
+    user='root',
+    password=None,
+    db='proyecto',
 )
 
 

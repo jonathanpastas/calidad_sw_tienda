@@ -1,5 +1,5 @@
 from flask import Flask, render_template ,request, session, redirect, url_for,flash
-import hashlib
+
 
 from bdatos import *
 
@@ -8,8 +8,7 @@ app.secret_key='jsp1234'
 
 @app.route('/')
 def index() -> 'html':
-    result = hashlib.md5(b'1234')
-    print('equivale', result.digest())
+
     return render_template('index.html', titulo='HomeSmart')
 
 
