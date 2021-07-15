@@ -88,4 +88,17 @@ def mprodcat(categoria,id):
     return data
 
 
+def nuevocliente(cedula,nombre,apellido,telefono,direccion,correo,clave):
+    try:
+        sql="INSERT INTO CLIENTES (cedula,id_perfil,nombre,apellido,telefono,direccion,correo,clave) values " \
+             "('"+str(cedula)+"','1','"+str(nombre)+"','"+str(apellido)+"','"+str(telefono)+"','"+str(direccion)+"','"+str(correo)+"','"+str(clave)+"');"
+        cursor = db.cursor()
+        cursor.execute(sql)
+        db.commit()
+        return True
+    except:
+        return False
+
+
+
 

@@ -14,6 +14,11 @@ def index() -> 'html':
 def login() -> 'html':
     return render_template('login.html', titulo='Iniciar Sesión')
 
+@app.route('/registro')
+def cuentanueva() -> 'html':
+    return render_template('registrarse.html', titulo='Crear una Cuenta Nueva')
+
+#################METODOS PRINCIPALES DE FUNCIONAMIENTO DEL SITIO ##################
 #Metodo para Ingresar a la Sesion,Valida el Cliente
 
 @app.route('/ingresar' ,methods=['POST'])
@@ -46,7 +51,7 @@ def paginicio() -> 'html':
         usuario=session['username']
         nom = str(session['nombre'])
         lista=listaproductosg()
-        return render_template('cliente.html',titulo="HomeSmart | Bienvenido",lstp=lista,nomb=nom)
+        return render_template('cliente.html',titulo="HomeSmart",lstp=lista,nomb=nom)
 
 
     else :
@@ -73,13 +78,31 @@ def mostrarprod()->'html':
         daca=mprodcat(cat,prod)
         print(datpro)
 
-        return render_template('producto.html',titulo="HomeSmart | Bienvenido",nomb=nom,pr=datpro,pc=daca)
+        return render_template('producto.html',titulo="HomeSmart",nomb=nom,pr=datpro,pc=daca)
 
 
     else :
         return redirect(url_for('index'))
 
+@app.route('/ingresarclie',methods=['POST'])
+def ingusuario()->'html':
 
+        cedula = request.form['cedula']
+        apellido = request.form['apellido']
+        nombre = request.form['nombre']
+        telefono = request.form['telefono']
+        direccion = request.form['domicilio']
+        correo = request.form['correo']
+        clave = request.form['contrasenia']
+
+        ingresar=nuevocliente(cedula, nombre, apellido, telefono, direccion, correo, clave)
+
+        if ingresar == True:
+            flash("Su Proceso de ha completado con Exito,ahora ingrese con su correo y contraseña registrados")
+            return redirect(url_for('login'))
+        else:
+            flash("Error al Ingresar el Usuario Verifique que la Información Ingresada sea Correcta")
+            return redirect(url_for('cuentanueva'))
 
 
 app.run(debug=True)

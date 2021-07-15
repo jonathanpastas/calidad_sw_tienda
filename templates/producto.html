@@ -24,7 +24,7 @@
                                     {{ nomb }}
                                 </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/cerrarsesion">CERRAR SESION</a></li>
+                                <li><a class="dropdown-item" href="/cerrarsesion">Cerrar Sesión</a></li>
 
                             </ul>
                          </li>
@@ -48,6 +48,8 @@
                             <span>${{t.6}}</span>
                         </div>
                         <p class="lead">{{t.2}}</p>
+
+                        <form method="POST" action="agcarrito">
                         <div class="d-flex">
                             <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
@@ -55,6 +57,8 @@
                                 Añadir al Carrito
                             </button>
                         </div>
+
+                        </form>
                     </div>
                     {% endfor %}
 
