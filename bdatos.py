@@ -15,8 +15,6 @@ def queryDatos(user, contra):
         email=row[6]
         contrasenia=row[7]
 
-        print(email)
-        print(contrasenia)
         if email == user and contrasenia == contra:
             return True
         else:
@@ -100,5 +98,25 @@ def nuevocliente(cedula,nombre,apellido,telefono,direccion,correo,clave):
         return False
 
 
+def verprocompara(id):
 
+    sql = "SELECT nombreprod,caracteristicas,imagen FROM PRODUCTOS where id_producto="+id
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
 
+    return data
+
+def agcarrito(cedula,nite,idpro):
+
+    try:
+        sql = "INSERT INTO carro (id_producto,cedula,cantidad) values " \
+          "('" + str(idpro) + "','" + str(cedula) + "','" + str(nite) + "');"
+        print(sql)
+        cursor = db.cursor()
+        cursor.execute(sql)
+        db.commit()
+        return True
+
+    except:
+        return False

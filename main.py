@@ -4,6 +4,7 @@ from bdatos import *
 app = Flask(__name__)
 app.secret_key='jsp1234'
 
+################# METODOS DONDE SE RENDERIZAN PAGINAS WEB ##################
 @app.route('/')
 def index() -> 'html':
 
@@ -18,21 +19,24 @@ def login() -> 'html':
 def cuentanueva() -> 'html':
     return render_template('registrarse.html', titulo='Crear una Cuenta Nueva')
 
+
+
+
 #################METODOS PRINCIPALES DE FUNCIONAMIENTO DEL SITIO ##################
 #Metodo para Ingresar a la Sesion,Valida el Cliente
 
 @app.route('/ingresar' ,methods=['POST'])
 def ingreso() -> 'html':
   user=request.form['correo']
-  clave = request.form['clave']
-  validar=queryDatos(user,clave)
+  clave1 = request.form['contrasenia']
+  validar=queryDatos(user, clave1)
 
   if validar == True:
       perfilu = perfiluser(user)
       nombre = nombreuser(user)
       cedula = ciuser(user)
       session['username']=user
-      session['pass']=clave
+      session['pass']=clave1
       session['perfiluser']=perfilu
       session['nombre']=nombre
       session['ci']=cedula
@@ -104,5 +108,67 @@ def ingusuario()->'html':
             flash("Error al Ingresar el Usuario Verifique que la Información Ingresada sea Correcta")
             return redirect(url_for('cuentanueva'))
 
+@app.route('/comparar')
+def vcomparar() -> 'html':
+    if 'username' in session:
+        usuario = session['username']
+        nom = str(session['nombre'])
+        listap = listaproductosg()
 
+        return render_template('comparacion.html', titulo='Comparación de Productos',nomb=nom,prod=listap)
+
+    else :
+        return redirect(url_for('index'))
+
+
+@app.route('/pcomparar',methods=['POST'])
+def comparaciones()->'html':
+    if 'username' in session:
+        usuario = session['username']
+        nom = str(session['nombre'])
+        p1 = request.form['prod1']
+        p2 = request.form['prod2']
+        proa = verprocompara(p1)
+        prob = verprocompara(p2)
+
+        return render_template('vercomparaciones.html', titulo='Comparación de Productos', nomb=nom, pa=proa,pb=prob)
+
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/ayuda')
+def ayudasclie()->'html':
+    if 'username' in session:
+        usuario = session['username']
+        nom = str(session['nombre'])
+
+        return render_template('ayudaclie.html', titulo='Comparación de Productos', nomb=nom)
+
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/agcarrito',methods=['POST'])
+def carritoag()->'html':
+    if 'username' in session:
+        cedula=session['ci']
+        usuario = session['username']
+        nom = str(session['nombre'])
+        npro = request.form['numc']
+        idpro = request.form['prodId']
+        ingresar= agcarrito(cedula,npro,idpro);
+
+        if ingresar == True:
+            flash("Se ha añadido al carrito correctamente")
+            return redirect(url_for('paginicio'))
+        else:
+            flash("Error al añadir el producto verifique si existe stock")
+            return redirect(url_for('paginicio'))
+
+
+
+
+
+###########FIN DEL PROGRAMA #################
 app.run(debug=True)

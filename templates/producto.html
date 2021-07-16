@@ -12,12 +12,13 @@
                         <li class="nav-item"><a class="nav-link" href="/ayuda">Ayuda</a></li>
 
                     </ul>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Carrito
 
-                        </button>
+
+                            <a class="btn btn-outline-dark" href="/vercarrito" role="button">Carrito
+                            <i class="bi-cart-fill me-1"></i></a>
+
+
+
 
                          <li class="nav-item dropdown" style="list-style:none;">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -30,7 +31,6 @@
                          </li>
 
 
-                    </form>
                 </div>
             </div>
         </nav>
@@ -47,12 +47,19 @@
                         <div class="fs-5 mb-5">
                             <span>${{t.6}}</span>
                         </div>
+
+
+
+
+
                         <p class="lead">{{t.2}}</p>
 
                         <form method="POST" action="agcarrito">
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" name="numc"  style="max-width: 3rem" required />
+                            <input id="prodId" name="prodId" type="hidden" value="{{t.0}}">
+
+                            <button class="btn btn-outline-dark flex-shrink-0" type="submit">
                                 <i class="bi-cart-fill me-1"></i>
                                 Añadir al Carrito
                             </button>
