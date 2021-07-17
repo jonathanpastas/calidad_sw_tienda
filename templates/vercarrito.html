@@ -1,0 +1,102 @@
+{% extends 'baseclientes.html' %}
+
+{% block body %}
+ <!-- Navigation-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="/inicio">Tienda </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/inicio">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/ayuda">Ayuda</a></li>
+
+                    </ul>
+
+
+                            <a class="btn btn-outline-dark" href="/vercarrito" role="button">Carrito
+                            <i class="bi-cart-fill me-1"></i></a>
+
+
+
+
+                         <li class="nav-item dropdown" style="list-style:none;">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ nomb }}
+                                </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/cerrarsesion">Cerrar Sesión</a></li>
+
+                            </ul>
+                         </li>
+
+
+                </div>
+            </div>
+        </nav>
+
+
+<!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Mi Carrito de Compras</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Sus productos apareceran para proceder con el pago</p>
+                </div>
+            </div>
+        </header>
+
+<br>
+<br>
+
+<div class="container">
+
+
+
+  <table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#Orden</th>
+      <th scope="col">Imagen</th>
+      <th scope="col">Descripción</th>
+      <th scope="col">Cantidad</th>
+        <th scope="col">Valor a Pagar</th>
+        <th scope="col">Acciones</th>
+
+    </tr>
+  </thead>
+  <tbody>
+   {% for tc in carpro %}
+    <tr>
+      <th scope="row">0{{tc.0}}</th>
+      <td ><img src="{{tc.2}}" width="10%" alt="ima"> </td>
+      <td>{{tc.1}}</td>
+      <td>{{tc.3}}</td>
+        <td>{{tc.4}}</td>
+        <td>
+            <a class="btn btn-success" href="/pagar?prod={{tc.0}}" role="button">Comprar</a>
+
+        </td>
+
+        <td> <a class="btn btn-danger" href="/eliminarcar?prod={{tc.0}}" role="button">Eliminar </a></td>
+
+
+    </tr>
+
+
+    {% endfor %}
+
+  </tbody>
+</table>
+
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}

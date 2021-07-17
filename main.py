@@ -20,7 +20,9 @@ def cuentanueva() -> 'html':
     return render_template('registrarse.html', titulo='Crear una Cuenta Nueva')
 
 
-
+@app.route('/verproductos')
+def listaproductos() -> 'html':
+    return render_template('productosbase.html', titulo='Lista de Productos')
 
 #################METODOS PRINCIPALES DE FUNCIONAMIENTO DEL SITIO ##################
 #Metodo para Ingresar a la Sesion,Valida el Cliente
@@ -166,7 +168,17 @@ def carritoag()->'html':
             flash("Error al añadir el producto verifique si existe stock")
             return redirect(url_for('paginicio'))
 
+@app.route('/vercarrito')
+def vcarritocompra()->'html':
+    if 'username' in session:
+        usuario = session['username']
+        nom = str(session['nombre'])
+        cedula = session['ci']
+        valores=visualcarrito(cedula)
+        return render_template('vercarrito.html', titulo='Carrito de Compras', nomb=nom,carpro=valores)
 
+    else:
+        return redirect(url_for('index'))
 
 
 

@@ -49,14 +49,11 @@
                         </div>
 
 
-
-
-
                         <p class="lead">{{t.2}}</p>
 
                         <form method="POST" action="agcarrito">
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" name="numc"  style="max-width: 3rem" required />
+                            <input class="form-control text-center me-3" id="inputQuantity" type="number" name="numc" min="1" max="{{t.4}}" value="0" style="max-width: 3rem" required />
                             <input id="prodId" name="prodId" type="hidden" value="{{t.0}}">
 
                             <button class="btn btn-outline-dark flex-shrink-0" type="submit">

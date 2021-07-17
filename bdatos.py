@@ -120,3 +120,15 @@ def agcarrito(cedula,nite,idpro):
 
     except:
         return False
+
+
+
+def visualcarrito(cedula):
+
+    sql = "SELECT CARRO.ID_CARRITO,PRODUCTOS.NOMBREPROD,PRODUCTOS.IMAGEN,CARRO.CANTIDAD,(PRODUCTOS.PRECIO*CARRO.CANTIDAD) " \
+          "AS SUBTOTAL FROM CARRO,PRODUCTOS WHERE CARRO.ID_PRODUCTO = PRODUCTOS.ID_PRODUCTO AND CARRO.CEDULA='"+str(cedula)+"';"
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+
+    return data
