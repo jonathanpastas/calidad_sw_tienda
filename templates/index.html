@@ -6,10 +6,37 @@
             <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="/">HomeSmart</a>
+                    <a class="navbar-brand" href="/"><img src="/static/img/logo.png" width="15%">&nbsp; HomeSmart</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <!-- Button trigger modal -->
+<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <img src="/static/img/traducir.png" alt="traduccion">
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Seleccione un Idioma</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+            <a class="btn btn-primary" href="#" role="button">Inglés</a>
+          <a class="btn btn-primary" href="#" role="button">Aleman</a>
+          <a class="btn btn-primary" href="#" role="button">Ruso</a>
+
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
                             <li class="nav-item"><a class="nav-link" href="/verproductos">Productos</a></li>
                             <li class="nav-item"><a class="nav-link" href="/contactos">Conctactos</a></li>
@@ -23,19 +50,25 @@
             <!-- Page Content-->
             <section class="py-5">
                 <div class="container px-5">
-                    <h1 class="fw-bolder fs-5 mb-4">Productos para tu Casa Inteligente</h1>
+                    <h1 class="fw-bolder fs-5 mb-4">Los mejores productos para tu Casa Inteligente</h1>
                     <div class="card border-0 shadow rounded-3 overflow-hidden">
                         <div class="card-body p-0">
                             <div class="row gx-0">
                                 <div class="col-lg-6 col-xl-5 py-lg-5">
                                     <div class="p-4 p-md-5">
                                         <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>
-                                        <div class="h2 fw-bolder">Articulo 1 </div>
-                                        <p> Descripcion de la tienda</p>
+                                        <div class="h2 fw-bolder"> En HomeSmart </div>
+                                        <p align="justify" id="texto">
+                                        Contamos con los mejores dispositivos para controlar tu casa de forma mucho más sencilla,
+                                            aquí encontraras productos de Google, Amazon y otras marcas top que estas revolucionado
+                                            el mercado de las SmartHome.
+
+                                        </p>
+                                        <button type="button" class="btn btn-outline-secondary" id="hablar"><img src="/static/img/habla.png"></button>
 
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-xl-7"><div class="bg-featured-blog" style="background-image: url('https://dummyimage.com/700x350/343a40/6c757d')"></div></div>
+                                <div class="col-lg-6 col-xl-7"><div class="bg-featured-blog" style="background-image: url('/static/img/domo.jpg');width:100%;"></div></div>
                             </div>
                         </div>
                     </div>
@@ -45,22 +78,38 @@
                 <div class="container px-5">
                     <div class="row gx-5">
                         <div class="col-xl-8">
-                            <h2 class="fw-bolder fs-5 mb-4">Detalle</h2>
+                            <h2 class="fw-bolder fs-5 mb-4"> Preguntas Frecuentes</h2>
                             <!-- News item-->
                             <div class="mb-4">
-                                <div class="small text-muted">Detalle 1 </div>
+                                <div class="small text-muted"><h4><b>¿Qué es una Casa Inteligente?</b></h4></div>
+                                <br>
+
+                                <p align="justify">
+                                     Se llama casa inteligente a aquella vivienda que integra diferentes tecnologías para controlar los
+                                    sistemas de seguridad, sistemas energéticos o comunicaciones, entre otros, para brindar un mayor confort y eficiencia.
+                                    Uno de sus objetivos es automatizar las actividades cotidianas mediante el uso de la domótica.
+
+
+                                </p>
+
+
 
                             </div>
                             <!-- News item-->
                             <div class="mb-5">
-                                <div class="small text-muted">Detalle 2 </div>
+                                <div class="small text-muted"><h4><b> Ventajas de las Casas Inteligentes</b></h4> </div>
+                                <br>
+                                Las principales ventajas de convertir su casa en una SmartHome es :
+                                <ul>
+                                    <li> Seguridad </li>
+                                    <li> Comodidad </li>
+                                    <li> Ahorro de Energia </li>
+
+
+                                </ul>
 
                             </div>
-                            <!-- News item-->
-                            <div class="mb-5">
-                                <div class="small text-muted">Detalle 3</div>
-                                </a>
-                            </div>
+
 
                         </div>
                         <div class="col-xl-4">
@@ -68,17 +117,17 @@
                                 <div class="card-body p-4">
                                     <div class="d-flex h-100 align-items-center justify-content-center">
                                         <div class="text-center">
-                                            <div class="h6 fw-bolder">Contact</div>
-                                            <p class="text-muted mb-4">
-                                                For press inquiries, email us at
+                                            <div class="h6 fw-bolder">Contactos</div>
+                                            <p class="text-muted mb-4" align="justify">
+                                                Presiona en uno de nuestros contactos para obtener más información
                                                 <br />
-                                                <a href="#!">press@domain.com</a>
+
                                             </p>
-                                            <div class="h6 fw-bolder">Follow us</div>
-                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-twitter"></i></a>
+                                            <div class="h6 fw-bolder">Somos HomeSmartEC</div>
+
                                             <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-facebook"></i></a>
-                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-linkedin"></i></a>
-                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-youtube"></i></a>
+                                               <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-whatsapp"></i></a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -90,37 +139,57 @@
             <!-- Blog preview section-->
             <section class="py-5">
                 <div class="container px-5">
-                    <h2 class="fw-bolder fs-5 mb-4">Productos Destacados</h2>
+                    <h2 class="fw-bolder fs-5 mb-4">Principales marcas de SmartHome</h2>
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
+                                <img class="card-img-top" src="/static/img/googlehome.jpg" alt="..." />
                                 <div class="card-body p-4">
 
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><div class="h5 card-title mb-3">Blog post title</div></a>
-                                    <p class="card-text mb-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><div class="h5 card-title mb-3"><center>Google</center></div></a>
+                                    <p class="card-text mb-0" align="justify">
+                                        Google Home te permite configurar y controlar altavoces y pantallas Google Nest o Google Home,
+                                        además de dispositivos Chromecast. Puedes controlar miles de luces, cámaras, altavoces y otros dispositivos compatibles,
+                                        así como consultar tus recordatorios y notificaciones recientes desde una sola aplicación
+
+
+                                    </p>
                                 </div>
 
                             </div>
                         </div>
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="https://dummyimage.com/600x350/adb5bd/495057" alt="..." />
+                                <img class="card-img-top" src="/static/img/amazon.png" alt="..." />
                                 <div class="card-body p-4">
+                                    <br>
+                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><div class="h5 card-title mb-3"><center>Amazon</center></div></a>
+                                    <p class="card-text mb-0">
+                                        El funcionamiento de Alexa es muy parecido al de otros asistentes como Google Assistant,
+                                        Siri y Cortana. Empiezas invocándolo diciendo su nombre, momento en el que el altavoz o
+                                        dispositivo en el que esté integrado se pondrá a escuchar. Entonces debes decirle un comando con tu voz,
+                                        y el asistente reconocerá lo que le preguntas y te dirá una respuesta.
+                                    </p>
 
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><div class="h5 card-title mb-3">Another blog post title</div></a>
-                                    <p class="card-text mb-0">This text is a bit longer to illustrate the adaptive height of each card. Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 </div>
 
                             </div>
                         </div>
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="https://dummyimage.com/600x350/6c757d/343a40" alt="..." />
+                                <img class="card-img-top" src="/static/img/xiaomi.jpg" alt="..." />
                                 <div class="card-body p-4">
+                                    <br>
 
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><div class="h5 card-title mb-3">The last blog post title is a little bit longer than the others</div></a>
-                                    <p class="card-text mb-0">Some more quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><div class="h5 card-title mb-3"><center>Xiaomi</center></div></a>
+                                    <p class="card-text mb-0" align="justify">
+
+                                        Gracias a gran entorno de productos Xiaomi se ha convertido en las empresas top de
+                                        tecnología ya que cuenta con una gran variedad de productos desde luces inteligentes
+                                        hasta aspiradoras haciéndola una de las empresas referencia en cuanto a SmartHome,
+                                        con su aplicación MiHome se puede controlar cualquier dispositivo, también Xiaomi
+                                        permite la integración de otras aplicaciones de domótica.
+                                    </p>
                                 </div>
 
                             </div>
@@ -131,5 +200,18 @@
             </section>
         </main>
 
+<script>
+
+var data=document.getElementById('texto').innerHTML;
+//console.log(data);
+document.getElementById('hablar').addEventListener("click",()=>{
+    decir(data);
+});
+
+function decir(texto){
+    speechSynthesis.speak(new SpeechSynthesisUtterance(texto));
+}
+
+</script>
 
  {% endblock %}
