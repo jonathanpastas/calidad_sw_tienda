@@ -132,3 +132,73 @@ def visualcarrito(cedula):
     data = cursor.fetchall()
 
     return data
+
+
+def prodgoogle():
+
+    sql="select * from productos where tipo='G'"
+    sql1 = "select * from productos where tipo='A'"
+    sql2 = "select * from productos where tipo='X'"
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+
+    cursor1 = db.cursor()
+    cursor1.execute(sql1)
+    data1 = cursor1.fetchall()
+
+    cursor2 = db.cursor()
+    cursor2.execute(sql2)
+    data2 = cursor2.fetchall()
+    return data,data1,data2
+
+#######metodos para conteo ###############
+
+def numerogeneralpro():
+
+    sql = "select count(*)as registros from productos;"
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    for row in data:
+        data = row[0]
+
+    return data
+
+def numerogeneralprog():
+
+    sql = "select count(*)as registros from productos where tipo='G';"
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    for row in data:
+        data = row[0]
+
+    return data
+
+def numerogeneralproa():
+
+    sql = "select count(*)as registros from productos where tipo='A';"
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    for row in data:
+        data = row[0]
+
+    return data
+
+def numerogeneralprox():
+
+    sql = "select count(*)as registros from productos where tipo='X';"
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    for row in data:
+        data = row[0]
+
+    return data
+
+
+
+
+#### ingreso de metricas ####################

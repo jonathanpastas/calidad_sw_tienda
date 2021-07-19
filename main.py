@@ -22,7 +22,26 @@ def cuentanueva() -> 'html':
 
 @app.route('/verproductos')
 def listaproductos() -> 'html':
-    return render_template('productosbase.html', titulo='Lista de Productos')
+    lista = listaproductosg()
+    numero=numerogeneralpro()
+    nug=numerogeneralprog()
+    nua = numerogeneralproa()
+    nux = numerogeneralprox()
+    prog,proa,progx=prodgoogle();
+    return render_template('productosbase.html', titulo='Lista de Productos',lstp=lista,np=numero,ng=nug,na=nua,nx=nux,go=prog,am=proa,xi=progx)
+
+@app.route('/productod',methods=['GET'])
+def productogeneral()->'html':
+
+        prod = request.args.get('id')
+
+        datpro,cat=mostrarproducto(prod)
+        daca=mprodcat(cat,prod)
+        print(datpro)
+
+        return render_template('detallep.html',titulo="HomeSmart",pr=datpro,pc=daca)
+
+
 
 #################METODOS PRINCIPALES DE FUNCIONAMIENTO DEL SITIO ##################
 #Metodo para Ingresar a la Sesion,Valida el Cliente
@@ -61,7 +80,7 @@ def paginicio() -> 'html':
 
 
     else :
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
 
 #Metodo para Cerrar la Sesion
 @app.route('/cerrarsesion')
