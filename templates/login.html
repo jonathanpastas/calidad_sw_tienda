@@ -3,7 +3,7 @@
 {% block body %}
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="/">HomeSmart</a>
+                    <a class="navbar-brand" href="/"><img src="/static/img/logo.png" width="15%">&nbsp;HomeSmart</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -25,11 +25,13 @@
 <div class="container">
 
 <div class="row align-items-start">
-    <div class="col">
-      <img src="/static/img/login.jpg" class="img-fluid" alt="logo">
+    <div class="col" >
+      <img src="/static/img/imalogin.png" class="img-fluid" alt="logo">
     </div>
 
-    <div class="col">
+    <div class="col" style="background-color: #283747 ;border-radius:10px; ">
+        <p style="color:#F4F6F7;" id="texto"><b>Bienvenido a HomeSmart, Estimado Cliente por favor ingrese su correo y contraseña o pulse en <i style="color:#E74C3C;"> Crear una Cuenta </i>
+            para registrarse y disfrutar de todos nuestros servicios.</b> <button type="button" class="btn btn-outline-secondary" id="hablar"><img src="/static/img/habla.png"></button></p>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
 
@@ -47,13 +49,18 @@
           <!-- Formulario de login columna 2  -->
         <form method="POST" action="ingresar">
                 <div class="form-group">
-                    <label for="correo">Correo Electronico</label>
+                    <label for="correo" style="color:#27AE60;"><b>Correo Electronico </b>
+
+
+
+
+                    </label>
 
                     <input type="email" class="form-control" id="correo" name="correo" aria-describedby="emailHelp" placeholder="Ejm:ejemplo@ejemplo.com" required>
                     <small id="emailHelp" class="form-text text-muted">Ingrese su Correo Electronico</small>
                 </div>
                 <div class="form-group">
-                    <label for="clave">Contraseña </label>
+                    <label for="clave" style="color:#27AE60;"><b>Contraseña</b> </label>
                     <input type="password" class="form-control" id="clave" name="contrasenia" placeholder="Contraseña" required>
                 </div>
                     <br>
@@ -63,19 +70,35 @@
          </form>
 
 
-
+<br>
             <!-- Fin de Formulario de login columna 2  -->
     </div>
 
 </div>
 
 
-</div>
 
+
+</div>
 <br>
 <br>
 <br>
-<br>
+
+<script>
+
+var data=document.getElementById('texto').innerHTML;
+//console.log(data);
+document.getElementById('hablar').addEventListener("click",()=>{
+    decir(data);
+});
+
+function decir(texto){
+    speechSynthesis.speak(new SpeechSynthesisUtterance(texto));
+}
+
+
+
+</script>
 
 
 

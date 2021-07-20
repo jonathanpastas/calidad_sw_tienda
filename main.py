@@ -41,7 +41,16 @@ def productogeneral()->'html':
 
         return render_template('detallep.html',titulo="HomeSmart",pr=datpro,pc=daca)
 
-
+####Internacionalizacion
+@app.route('/en')
+def englishpage() -> 'html':
+    return render_template('indexen.html', titulo='Welcome HomeSmart')
+@app.route('/al')
+def germanpage() -> 'html':
+    return render_template('indexal.html', titulo='herzlich willkommen HomeSmart')
+@app.route('/ru')
+def rusianpage() -> 'html':
+    return render_template('indexru.html', titulo='Добро пожаловать HomeSmart')
 
 #################METODOS PRINCIPALES DE FUNCIONAMIENTO DEL SITIO ##################
 #Metodo para Ingresar a la Sesion,Valida el Cliente
@@ -76,7 +85,12 @@ def paginicio() -> 'html':
         usuario=session['username']
         nom = str(session['nombre'])
         lista=listaproductosg()
-        return render_template('cliente.html',titulo="HomeSmart",lstp=lista,nomb=nom)
+        numero = numerogeneralpro()
+        nug = numerogeneralprog()
+        nua = numerogeneralproa()
+        nux = numerogeneralprox()
+        prog, proa, progx = prodgoogle();
+        return render_template('cliente.html',titulo="HomeSmart",lstp=lista,nomb=nom,np=numero,ng=nug,na=nua,nx=nux,go=prog,am=proa,xi=progx)
 
 
     else :
