@@ -207,9 +207,7 @@ document.getElementById('hablar').addEventListener("click",()=>{
 });
 
 function decir(texto){
-    let utterance = new SpeechSynthesisUtterance(texto)
-    utterance.lang = 'ru-RU'
-    speechSynthesis.speak(utterance)
+    speechSynthesis.speak(new SpeechSynthesisUtterance(texto));
 }
 
 </script>

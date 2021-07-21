@@ -16,7 +16,7 @@
 
 
                             <a class="btn btn-outline-dark" href="/vercarrito" role="button">Carrito
-                            <i class="bi-cart-fill me-1"></i></a>
+                            <i class="bi-cart-fill me-1"></i><span class="badge rounded-pill bg-secondary">{{cant}}</span></a>
 
 
 
@@ -54,11 +54,10 @@
 
 
 
-  <table class="table">
+  <table class="table table-striped">
   <thead class="thead-light">
     <tr>
-      <th scope="col">#Orden</th>
-      <th scope="col">Imagen</th>
+
       <th scope="col">Descripción</th>
       <th scope="col">Cantidad</th>
         <th scope="col">Valor a Pagar</th>
@@ -69,13 +68,13 @@
   <tbody>
    {% for tc in carpro %}
     <tr>
-      <th scope="row">0{{tc.0}}</th>
-      <td ><img src="{{tc.2}}" width="10%" alt="ima"> </td>
+
       <td>{{tc.1}}</td>
       <td>{{tc.3}}</td>
         <td>{{tc.4}}</td>
-        <td>
-            <a class="btn btn-success" href="/pagar?prod={{tc.0}}" role="button">Comprar</a>
+
+
+
 
         </td>
 
@@ -90,13 +89,31 @@
   </tbody>
 </table>
 
+   <i><h4 align="right"> SUBTOTAL : {{sto}}</h4></i>
+    <p align="right"> <a class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" href="/pagar">Confirmar Pago</a></p>
+
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel"></h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+
+    <h4> Confirmación de Pago</h4>
+
+
+
+
+
+
+
+  </div>
+
 
 </div>
 
 
-
-
-
-
+    </div> <!-- FinContainer-->
 
 {% endblock %}

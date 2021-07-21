@@ -84,13 +84,15 @@ def paginicio() -> 'html':
         #menu=menuopciones(str(session['perfiluser']))
         usuario=session['username']
         nom = str(session['nombre'])
+        ced = str(session['ci'])
         lista=listaproductosg()
         numero = numerogeneralpro()
         nug = numerogeneralprog()
         nua = numerogeneralproa()
         nux = numerogeneralprox()
-        prog, proa, progx = prodgoogle();
-        return render_template('cliente.html',titulo="HomeSmart",lstp=lista,nomb=nom,np=numero,ng=nug,na=nua,nx=nux,go=prog,am=proa,xi=progx)
+        prog, proa, progx = prodgoogle()
+        cpro=cantidadcarrito(ced)
+        return render_template('cliente.html',titulo="HomeSmart",lstp=lista,nomb=nom,np=numero,ng=nug,na=nua,nx=nux,go=prog,am=proa,xi=progx,cant=cpro)
 
 
     else :
@@ -110,6 +112,8 @@ def mostrarprod()->'html':
         print("true")
         #menu=menuopciones(str(session['perfiluser']))
         usuario=session['username']
+        ced = str(session['ci'])
+        cpro = cantidadcarrito(ced)
         nom = str(session['nombre'])
         prod = request.args.get('id')
 
@@ -117,7 +121,7 @@ def mostrarprod()->'html':
         daca=mprodcat(cat,prod)
         print(datpro)
 
-        return render_template('producto.html',titulo="HomeSmart",nomb=nom,pr=datpro,pc=daca)
+        return render_template('producto.html',titulo="HomeSmart",nomb=nom,pr=datpro,pc=daca,cant=cpro)
 
 
     else :
@@ -149,8 +153,9 @@ def vcomparar() -> 'html':
         usuario = session['username']
         nom = str(session['nombre'])
         listap = listaproductosg()
-
-        return render_template('comparacion.html', titulo='Comparación de Productos',nomb=nom,prod=listap)
+        ced = str(session['ci'])
+        cpro = cantidadcarrito(ced)
+        return render_template('comparacion.html', titulo='Comparación de Productos',nomb=nom,prod=listap,cant=cpro)
 
     else :
         return redirect(url_for('index'))
@@ -165,8 +170,9 @@ def comparaciones()->'html':
         p2 = request.form['prod2']
         proa = verprocompara(p1)
         prob = verprocompara(p2)
-
-        return render_template('vercomparaciones.html', titulo='Comparación de Productos', nomb=nom, pa=proa,pb=prob)
+        ced = str(session['ci'])
+        cpro = cantidadcarrito(ced)
+        return render_template('vercomparaciones.html', titulo='Comparación de Productos', nomb=nom, pa=proa,pb=prob,cant=cpro)
 
     else:
         return redirect(url_for('index'))
@@ -177,8 +183,9 @@ def ayudasclie()->'html':
     if 'username' in session:
         usuario = session['username']
         nom = str(session['nombre'])
-
-        return render_template('ayudaclie.html', titulo='Comparación de Productos', nomb=nom)
+        ced = str(session['ci'])
+        cpro = cantidadcarrito(ced)
+        return render_template('ayudaclie.html', titulo='Comparación de Productos', nomb=nom,cant=cpro)
 
     else:
         return redirect(url_for('index'))
@@ -207,8 +214,10 @@ def vcarritocompra()->'html':
         usuario = session['username']
         nom = str(session['nombre'])
         cedula = session['ci']
-        valores=visualcarrito(cedula)
-        return render_template('vercarrito.html', titulo='Carrito de Compras', nomb=nom,carpro=valores)
+        valores,sub=visualcarrito(cedula)
+        ced = str(session['ci'])
+        cpro = cantidadcarrito(ced)
+        return render_template('vercarrito.html', titulo='Carrito de Compras', nomb=nom,carpro=valores,sto=sub,cant=cpro)
 
     else:
         return redirect(url_for('index'))

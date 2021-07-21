@@ -131,7 +131,15 @@ def visualcarrito(cedula):
     cursor.execute(sql)
     data = cursor.fetchall()
 
-    return data
+    sql1 = "SELECT SUM(PRODUCTOS.PRECIO*CARRO.CANTIDAD) FROM CARRO,PRODUCTOS WHERE CARRO.ID_PRODUCTO = PRODUCTOS.ID_PRODUCTO AND CARRO.CEDULA='" + str(cedula) + "';"
+    cursor = db.cursor()
+    cursor.execute(sql1)
+    data1 = cursor.fetchall()
+    for row in data1:
+        stotal = row[0]
+
+
+    return data,stotal
 
 
 def prodgoogle():
@@ -198,7 +206,15 @@ def numerogeneralprox():
 
     return data
 
+def cantidadcarrito(id):
 
+    sql="SELECT count(*) from carro where cedula='"+str(id)+"';"
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    for row in data:
+        data = row[0]
 
+    return data
 
 #### ingreso de metricas ####################
