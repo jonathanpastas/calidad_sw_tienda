@@ -20,6 +20,18 @@ def queryDatos(user, contra):
         else:
             return False
 
+def existeuser(id):
+    sql = "select exists(select 1 from clientes where cedula='"+str(id)+"');"
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    for row in data:
+        dato = row[0]
+
+
+    return dato
+
+
 
 def perfiluser(user):
 
@@ -64,11 +76,11 @@ def listaproductosg():
 def mostrarproducto(id):
 
     sql = "select * from productos where id_producto="+id
-    print(sql)
+    #print(sql)
     cursor = db.cursor()
     cursor.execute(sql)
     data = cursor.fetchall()
-    print(data)
+    #print(data)
 
     for row in data:
         cat = row[5]
@@ -217,4 +229,40 @@ def cantidadcarrito(id):
 
     return data
 
-#### ingreso de metricas ####################
+
+def eliminarcarrito(id,cedula):
+    try:
+        sql="delete from carro where id_carrito='"+str(id)+"' and cedula='"+str(cedula)+"';"
+        print(sql)
+        cursor = db.cursor()
+        cursor.execute(sql)
+        db.commit()
+        return True
+    except:
+        return False
+
+
+def factura(cedula,nump,subtotal,total):
+
+    try:
+        sql = "INSERT INTO carro (cedula,numproductos,subtotal,total) values " \
+          "('" + str(cedula) + "','" + str(nump) + "','" + str(subtotal) + "','"+str(total)+"';"
+        print(sql)
+        cursor = db.cursor()
+        cursor.execute(sql)
+        db.commit()
+        return True
+
+    except:
+        return False
+
+def carritoel(cedula):
+    try:
+        sql="delete from carro where cedula='"+str(cedula)+"'"
+        print(sql)
+        cursor = db.cursor()
+        cursor.execute(sql)
+        db.commit()
+        return True
+    except:
+        return False

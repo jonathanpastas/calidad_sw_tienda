@@ -38,6 +38,8 @@
  <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
+
+
                     {% for t in pr %}
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{t.8}}" alt="..." /></div>
                     <div class="col-md-6">
@@ -45,6 +47,18 @@
                         <div class="small mb-1">Categoria : {{t.5}}</div>
                         <h1 class="display-5 fw-bolder">{{t.1}}</h1>
                         <div class="fs-5 mb-5">
+                                  {% with messages = get_flashed_messages() %}
+            {% if messages %}
+
+            {% for message in messages %}
+
+                {{ message|safe }}
+
+            {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
                             <span>${{t.6}}</span>
                         </div>
 
@@ -53,7 +67,7 @@
 
                         <form method="POST" action="agcarrito">
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="number" name="numc" min="1" max="{{t.4}}" value="0" style="max-width: 3rem" required />
+                            <input class="form-control text-center me-5" id="inputQuantity" type="number" name="numc" min="0" max="{{t.4}}" value="0" style="max-width: 5rem"  />
                             <input id="prodId" name="prodId" type="hidden" value="{{t.0}}">
 
                             <button class="btn btn-outline-dark flex-shrink-0" type="submit">
@@ -73,6 +87,10 @@
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
                 <h2 class="fw-bolder mb-4">Productos Relacionados : </h2>
+
+
+
+
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
                     {% for z in pc %}

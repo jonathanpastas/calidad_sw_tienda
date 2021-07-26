@@ -1,6 +1,43 @@
 {% extends 'baseclientes.html' %}
 
 {% block body %}
+<script>
+    function validar(){
+        var tarjetas=document.getElementById('tarjeta').value;
+        var claves=document.getElementById('clave').value;
+
+
+        var bandera=false;
+
+        for(var i=0;i<tarjetas.length;i++){
+			if(isNaN(parseInt(tarjetas.charAt(i)))==true){
+				alert("El campo Tarjeta de Credito no puede tener caracteres ")
+				return false;
+			}
+		}
+
+
+		if(tarjetas.length >17){
+			alert("Su tarjeta de credito tiene mas 16 digitos");
+			return false;
+		}
+
+		    for(var i=0;i<claves.length;i++){
+			if(isNaN(parseInt(claves.charAt(i)))==true){
+				alert("Recuerde que su clave debe ser numeros")
+				return false;
+			}
+		}
+
+
+		if(claves.length >4){
+			alert("El CV de la tarjeta son unicamente 3 digitos");
+			return false;
+		}
+
+    }
+
+</script>
  <!-- Navigation-->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -52,13 +89,24 @@
 
 <div class="container">
 
+  {% with messages = get_flashed_messages() %}
+            {% if messages %}
 
+            {% for message in messages %}
+
+                {{ message|safe }}
+
+            {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
 
   <table class="table table-striped">
   <thead class="thead-light">
     <tr>
 
-      <th scope="col">Descripción</th>
+        <th scope="col"><center>Descripción</center></th>
       <th scope="col">Cantidad</th>
         <th scope="col">Valor a Pagar</th>
         <th scope="col">Acciones</th>
@@ -89,7 +137,7 @@
   </tbody>
 </table>
 
-   <i><h4 align="right"> SUBTOTAL : {{sto}}</h4></i>
+   <b><i><h4 align="right"> SUBTOTAL : $ {{sto}}</h4></i></b>
     <p align="right"> <a class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" href="/pagar">Confirmar Pago</a></p>
 
 
@@ -100,12 +148,74 @@
   </div>
   <div class="offcanvas-body">
 
-    <h4> Confirmación de Pago</h4>
+      <h4> <center> INGRESO DE TARJETA DE CRÉDITO</center></h4>
+        <br>
+        <br>
+      <form method="POST" action="confirmapago" onsubmit="return validar()">
+
+        <div class="mb-3">
+            <b><label for="tarjeta" class="form-label">Número de Tarjeta de Crédito</label></b>
+            <input type="number" class="form-control" id="tarjeta" aria-describedby="emailHelp" name="tarjeta">
+
+        </div>
+
+          <div class="mb-3">
+               <div class="row">
+                    <div class="col">
+                        <b><label for="mess" class="form-label">Mes</label></b>
+                        <select class="form-select" aria-label="Default select example" id="mess" name="mes" >
+                            <option selected>Seleccione ..</option>
+                            <option value="1">01</option>
+                            <option value="2">02</option>
+                            <option value="3">03</option>
+                            <option value="3">04</option>
+                            <option value="3">05</option>
+                            <option value="3">06</option>
+                            <option value="3">07</option>
+                            <option value="3">08</option>
+                            <option value="3">09</option>
+                            <option value="3">10</option>
+                            <option value="3">11</option>
+                            <option value="3">12</option>
+                        </select>
+                    </div>
+                   <div class="col">
+                        <b><label for="anio" class="form-label">Año</label></b>
+                        <select class="form-select" aria-label="Default select example" id="anio" name="anio" >
+                            <option selected>Seleccione ..</option>
+                            <option value="1">2019</option>
+                            <option value="2">2020</option>
+                            <option value="3">2021</option>
+                            <option value="3">2022</option>
+                            <option value="3">2023</option>
+                            <option value="3">2024</option>
+
+                        </select>
+                    </div>
+               </div>
+
+
+        </div>
+        <div class="mb-3">
+            <label for="clave" class="form-label"><b>CV</b></label>
+            <input type="password" class="form-control" id="clave" name="clave">
+        </div>
+
+
+          <div class="mb-3">
+            <p align="justify"> Se procederá a realizar el pago por :<b> {{ sto }}$</b> ,el cual será debitado de su tarjeta de crédito proporcionada para confirmar su pago
+                pulse el botón de <b>PAGAR</b>.
+            </p>
+        </div>
+
+        <input type="hidden" value="{{ sto }}" name="total">
+
+        <button type="submit" class="btn btn-success btn-lg">Pagar</button>
 
 
 
 
-
+      </form>
 
 
   </div>
