@@ -48,12 +48,23 @@
 
     <div class="row">
     <div class="col">
-      <center><img src="/static/img/hecho.png"></center>
+      <center><img src="/static/img/hecho.png" class="img-fluid" width="50%"></center>
+        <br>
+        <br>
+        <br>
+          <br>
+        <br>
+        <br>
     </div>
     <div class="col">
 
-        <h2> Felicidades, tu compra se realizo con exito </h2>
-        El valor de pago fue de : {{ val }}
+        <b><h2 style="color:green"> Felicidades, tu compra se realizo con exito </h2></b>
+        <font size="5"> El valor de pago fue de : <b style="color:red"><i>{{ val }}$</i></b></font>
+
+        <br>
+        <br>
+        <br>
+        <a class="btn btn-warning btn-lg" href="/inicio" role="button"><b>REGRESAR AL INICIO</b></a>
 
     </div>
   </div>

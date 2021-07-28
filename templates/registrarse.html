@@ -21,44 +21,44 @@
 		}
 
 		if(cedula==null  || cedula.length == 0 || /^\s+$/.test(cedula) ){
-			alert("Por favor Ingrese su Cédula ");
+			alert("Por favor Ingrese su Cedula ");
 			return false;
 
 		}
 
 
 		if(cedula.length >10){
-			alert("La cedula contiene  maximo de 10 digitos.");
+			alert("La cedula contiene máximo de 10 dígitos.");
 			return false;
 		}
 
 		if(cedula.length <=9){
-			alert("La cedula contiene  menos de 10 digitos.");
+			alert("La cedula contiene menos de 10 dígitos.");
 			return false;
 		}
 
         for(var i=0;i<celular.length;i++){
 			if(isNaN(parseInt(celular.charAt(i)))==true){
-				alert("No se aceptan caracteres en el campo Numero de Telefono ")
+				alert("No se aceptan caracteres en el campo Numero de teléfono ")
 				return false;
 			}
 		}
 
 		if(celular.length >11){
-			alert("El numero de telefono debe contener hasta maximo 10 digitos  ");
+			alert("El número de teléfono debe contener hasta máximo 10 dígitos");
 			return false;
 		}
 
 		 for(var i=0;i<nombre.length;i++){
 			if(!isNaN(parseInt(nombre.charAt(i)))==true){
-				alert("Su nombre no puede tener numeros. ")
+				alert("Su nombre no puede tener números.")
 				return false;
 			}
 		}
 
 		 for(var i=0;i<apellido.length;i++){
 			if(!isNaN(parseInt(apellido.charAt(i)))==true){
-				alert("Su apellido no puede tener numeros. ")
+				alert("Su apellido no puede tener números. ")
 				return false;
 			}
 		}
@@ -89,8 +89,8 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-                            <li class="nav-item"><a class="nav-link" href="about.html">Productos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Conctactos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/verproductos">Productos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/contactos">Contactos</a></li>
 
 
 
@@ -109,7 +109,7 @@
      <div class="col">
 
         <h3><b> ESTIMADO USUARIO : </b></h3>
-        <p> <b style="color:red;"> Por Favor ingrese los siguientes dato solicitados para el registro de su cuenta. </b></p>
+        <p> <b style="color:red;"> Por Favor ingrese los siguientes datos solicitados para el registro de su cuenta.</b></p>
 
          <img src="/static/img/registro.png" class="img-fluid">
     </div>
@@ -134,27 +134,104 @@
         <form method="POST" action="ingresarclie" onsubmit="return validar()">
 
 
-        <b><label for="ccedula" >Ingrese su Cédula de Idéntidad: </label></b>
+        <b><label for="ccedula" >Ingrese su Cédula de Identidad: </label></b>
+
+  <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <img src="/static/img/ayuda.png" class="img-fluid" width="45%">
+  </a>
+
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+  <b style="color:green"> En este campo debe ingresar los 10 dígitos de cedula de identidad.</b>
+      <b><i style="color:red"> Por ejemplo : 17234673213</i></b>
+  </div>
+</div>
         <input type="text" class="form-control" id="ccedula" name="cedula" placeholder="C.I">
             <br>
             <b> <label for="cnombre" >Ingrese su Nombre : </label></b>
+
+              <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+   <img src="/static/img/ayuda.png" class="img-fluid" width="45%">
+  </a>
+
+<div class="collapse" id="collapseExample1">
+  <div class="card card-body">
+      <b style="color:green"> En este campo debe ingresar solamente su primer nombre.</b>
+      <b><i style="color:red"> Por ejemplo : Carlos</i></b>
+  </div>
+</div>
+
         <input type="text" class="form-control" id="cnombre" name="nombre" placeholder="Nombre">
             <br>
-            <b> <label for="capellido" >Ingrese su Apellido : </label></b>
+            <b> <label for="capellido" >Ingrese su Apellido: </label></b>
+              <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <img src="/static/img/ayuda.png" class="img-fluid" width="45%">
+  </a>
+
+<div class="collapse" id="collapseExample2">
+  <div class="card card-body">
+     <b style="color:green">En este campo debe ingresar solamente su apellido paterno o
+         en caso de no contar con un apellido paterno ingrese el materno</b>
+      <b><i style="color:red"> Por ejemplo : Rivera</i></b>
+
+  </div>
+</div>
         <input type="text" class="form-control" id="capellido" name="apellido" placeholder="Apellido">
             <br>
-            <b><label for="ctelefono" >Número de Telefono : </label></b>
+            <b><label for="ctelefono" >Número de teléfono : </label></b>
+              <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <img src="/static/img/ayuda.png" class="img-fluid" width="45%">
+  </a>
+
+<div class="collapse" id="collapseExample3">
+  <div class="card card-body">
+      <b style="color:green">En este campo debe ingresar los 10 números de su teléfono celular o los 9 dígitos de su teléfono
+    fijo. Recuerde colocar el identificador de provincia antes de su número fijo .
+</b>
+      <b><i style="color:red"> Por ejemplo: 0997862541 o (02) 2432123</i></b>
+  </div>
+</div>
         <input type="text" class="form-control" id="ctelefono" name="telefono" placeholder="09xxxxxxxxxx">
             <br>
-            <b> <label for="cdomi" >Dirección de Domicilio : </label></b>
-        <input type="text" class="form-control" id="cdomi" name="domicilio" placeholder="Ej.Av.Republica del Salvador">
+            <b> <label for="cdomi" >Dirección de Domicilio: </label></b>
+              <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <img src="/static/img/ayuda.png" class="img-fluid" width="45%">
+  </a>
+
+<div class="collapse" id="collapseExample4">
+  <div class="card card-body">
+      <b style="color:green">En este campo debe ingresar su dirección de domicilio. </b>
+      <b><i style="color:red">Por ejemplo: Av.Naciones Unidas y Republica</i></b>
+  </div>
+</div>
+        <input type="text" class="form-control" id="cdomi" name="domicilio" placeholder="Dirección">
 
               <br>
-            <b>  <label for="ccorreo" >Correo Electrónico : </label></b>
+            <b>  <label for="ccorreo" >Correo Electrónico: </label></b>
+              <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample">
+   <img src="/static/img/ayuda.png" class="img-fluid" width="45%">
+  </a>
+
+<div class="collapse" id="collapseExample5">
+  <div class="card card-body">
+    <b style="color:green">En este campo debe ingresar su correo electrónico personal,
+        recuerde que un correo tiene la siguiente estructura </b> <b><i style="color:red"> Por ejemplo: carlosrivera@gmail.com</i></b>
+  </div>
+</div>
         <input type="email" class="form-control" id="ccorreo" name="correo" placeholder="ejemplo@ejemplo.com">
 
               <br>
             <b> <label for="contr1" >Ingrese una Clave Personal para su Cuenta : </label></b>
+              <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample">
+   <img src="/static/img/ayuda.png" class="img-fluid" width="45%">
+  </a>
+
+<div class="collapse" id="collapseExample6">
+  <div class="card card-body">
+     <b style="color:green">En este campo debe ingresar una clave personal que debe contar con un mínimo de
+         8 digitos o caracteres.</b> <b><i style="color:red">Su clave personal es responsabilidad del cliente.</i></b>
+  </div>
+</div>
         <input type="password" class="form-control" id="contr1" name="contrasenia">
 
             <br>

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="/"><img src="/static/img/logo.png" width="15%">&nbsp;HomeSmart</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                            <li class="nav-item"><a class="nav-link" href="/verproductos">Productos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/contactos">Conctactos</a></li>
+
+
+
+                        </ul>
+                    </div>
+                </div>
+  </nav>
+
+<br>
+
+
+
+<div class="container">
+
+    <div class="alert alert-warning" role="alert">
+  <font size="4"> <b style="color:red"> Bienvenido al Sistema de Ayuda en Linea por favor detalle en el campo
+    Mensaje su problema y posteriormente un asesor se comunicara con usted mediante el correo electronico ingresado.
+    </b></font>
+</div>
+
+    <br>
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+
+            {% for message in messages %}
+
+                {{ message|safe }}
+
+            {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+    <br>
+
+     <div class="row">
+    <div class="col">
+       <img src="/static/img/ayudabaner.png" class="img-fluid" alt="logo">
+    </div>
+    <div class="col">
+      <form method="POST" action="comunicar1">
+
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label"><b>Detalle su Requerimiento</b></label>
+
+    <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample">
+   <img src="/static/img/ayuda.png" class="img-fluid" width="45%">
+  </a>
+
+<div class="collapse" id="collapseExample5">
+  <div class="card card-body">
+    <b style="color:green">Para detallar su requerimiento por favor coloque su nombre y apellido seguido de ello su correo electrónico y luego describa brevemente su petición con el fin de mantener un orden en nuestras solicitudes su
+        petición será contestada al correo escrito en su detalle. </b> <b><i style="color:red"> Gracias por su Comprensión</i></b>
+  </div>
+</div>
+
+
+
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="mensaje" required></textarea>
+</div>
+<br>
+        <center> <button type="submit" class="btn btn-success">Enviar</button></center>
+</form>
+    </div>
+  </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+{% endblock %}
+

@@ -78,7 +78,11 @@
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Mi Carrito de Compras</h1>
+                    <h1 class="display-4 fw-bolder">
+                          <img src="/static/img/carrito.png" class="img-fluid" width="5%">
+                        Mi Carrito de Compras
+                     <img src="/static/img/carrito.png" class="img-fluid" width="5%">
+                    </h1>
                     <p class="lead fw-normal text-white-50 mb-0">Sus productos apareceran para proceder con el pago</p>
                 </div>
             </div>
@@ -138,7 +142,7 @@
 </table>
 
    <b><i><h4 align="right"> SUBTOTAL : $ {{sto}}</h4></i></b>
-    <p align="right"> <a class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" href="/pagar">Confirmar Pago</a></p>
+    <p align="right"> <a class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" href="/pagar" disabled="{{bloq}}">Confirmar Pago</a></p>
 
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">

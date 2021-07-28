@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from bdatos import *
 from bddmetricas import *
+from datetime import datetime
 import time
+from correo import *
 
 app = Flask(__name__)
 app.secret_key = 'jsp1234'
@@ -25,6 +27,29 @@ def login() -> 'html':
 @app.route('/registro')
 def cuentanueva() -> 'html':
     return render_template('registrarse.html', titulo='Crear una Cuenta Nueva')
+
+@app.route('/contactos')
+def ayudaclc() -> 'html':
+    return render_template('ayuda.html', titulo='Crear una Cuenta Nueva')
+
+@app.route('/comunicar1',methods=['POST'])
+def correoinv()->'html':
+    #nombre = str(request.form['corres'])
+    #print("correo" + usuario)
+    mensaje = str(request.form['mensaje'])
+    tx=mensaje
+    ban=enviarcorreo(tx)
+
+    if ban == True:
+        flash(
+            '<div class="alert alert-success" role="alert"> <center><b> Correo Enviado Exitosamente</b></center> </div>')
+        return redirect(url_for('ayudaclc'))
+    else:
+        flash(
+            '<div class="alert alert-danger" role="alert"> <center><b>  Error al enviar el Mensaje</b></center> </div>')
+        return redirect(url_for('ayudaclc'))
+
+
 
 
 @app.route('/verproductos')
@@ -86,6 +111,16 @@ def ingreso() -> 'html':
         session['nombre'] = nombre
         session['ci'] = cedula
 
+        ###variables de las metricas
+        session['tiempo'] = time.time()
+        session['gtiempo']=0
+        session['nayudas'] = 0
+        session['nerrores'] = 0
+        session['tiempop'] = 0
+        session['ntrans'] = 0
+        session['tiempotran'] = time.time()
+        session['pcerradas']=0
+
         return redirect(url_for('paginicio'))
     else:
         flash(
@@ -102,8 +137,12 @@ def paginicio() -> 'html':
         usuario = session['username']
         nom = str(session['nombre'])
         ced = str(session['ci'])
-        session['tiempo'] = time.time()
-        session['nayudas'] = 0
+
+        tr=session['pcerradas']
+        sd=tr+1
+        session['pcerradas']=sd
+        ###############
+
         lista = listaproductosg()
         numero = numerogeneralpro()
         nug = numerogeneralprog()
@@ -130,10 +169,19 @@ def mostrarprod() -> 'html':
         nom = str(session['nombre'])
         prod = request.args.get('id')
 
+
         #metrica de cuanto tiempo necesita el usuario para pasar de una pagina a otra
         times=float(session['tiempo'])
-        print("tiempo entre cliente y producto es ",round(time.time()-times))
+        ctie=round(time.time()-times)
+
+        if  str(session['tiempop']) =="0":
+            session['tiempop']=ctie
+        #print("tiempo entre cliente y producto es ",round(time.time()-times))
         ##############################################################################
+        #######metrica de tiempo para completar una transaccion
+
+
+
         datpro, cat = mostrarproducto(prod)
         daca = mprodcat(cat, prod)
         #print(datpro)
@@ -158,7 +206,7 @@ def ingusuario() -> 'html':
 
     print(existe)
     if existe == True:
-        print("si existe pero no kcho")
+
         flash('<div class="alert alert-danger" role="alert"> <center><b> EL USUARIO YA EXISTE</b></center> </div>')
         return redirect(url_for('cuentanueva'))
     else:
@@ -218,7 +266,7 @@ def ayudasclie() -> 'html':
         session['nayudas']=ar+1
 
 
-        return render_template('ayudaclie.html', titulo='Comparación de Productos', nomb=nom, cant=cpro)
+        return render_template('ayudaclie.html', titulo='Ayuda', nomb=nom, cant=cpro,correo=usuario)
 
     else:
         return redirect(url_for('index'))
@@ -235,7 +283,12 @@ def carritoag() -> 'html':
         print(npro)
 
         if npro =="0" :
+            # metrica de numero de errores###
 
+            er = int(session['nerrores'])
+            session['nerrores'] = er + 1
+
+            ####
             flash('<div class="alert alert-danger" role="alert"> <center><b> Escoga una cantidad del Producto </b></center> </div>')
             return redirect("/producto?id="+idpro)
 
@@ -249,6 +302,13 @@ def carritoag() -> 'html':
         else:
             flash(
                 '<div class="alert alert-danger" role="alert"> <center><b> Error al Añadir su Producto por favor verifique si existe existencias.</b></center> </div>')
+            # metrica de numero de errores###
+
+            er = int(session['nerrores'])
+            session['nerrores'] = er + 1
+
+            ####
+
             return redirect(url_for('vcarritocompra'))
 
 
@@ -258,11 +318,23 @@ def vcarritocompra() -> 'html':
         usuario = session['username']
         nom = str(session['nombre'])
         cedula = session['ci']
-        valores, sub = visualcarrito(cedula)
-        ced = str(session['ci'])
-        cpro = cantidadcarrito(ced)
+        valores= visualcarrito(cedula)
+        sub=vsubtotal(cedula)
+        banderas="false"
+        if sub == None:
+            sub=0.00
+            banderas="true"
+            flash('<div class="alert alert-warning" role="alert"> <center><b> No tiene Productos Añadido al Carrito </b></center> </div>')
+
+        cpro = cantidadcarrito(cedula)
+        #####metrica de efectividad
+        ##se calcula en base a los productos que existen el carrito ya que se considerarian transacciones incompletas
+        fecha = datetime.now()
+        fechas = fecha.date()
+        efectividad(cpro,fechas)
+        #######
         return render_template('vercarrito.html', titulo='Carrito de Compras', nomb=nom, carpro=valores, sto=sub,
-                               cant=cpro)
+                               cant=cpro,bloq=banderas)
 
     else:
         return redirect(url_for('index'))
@@ -278,9 +350,10 @@ def eliminarcar() -> 'html':
         eliminar = eliminarcarrito(pr, ced)
 
         if eliminar == True:
+
             flash(
                 '<div class="alert alert-success" role="alert"> <center><b> Producto Eliminado del Carrito de Compras</b></center> </div>')
-            return redirect(url_for('vcarritocompra'))
+            return redirect("/vercarrito")
         else:
             flash(
                 '<div class="alert alert-danger" role="alert"> <center><b> No se ha podido eliminar el producto de su carrito por favor comuniquese con ayuda al cliente.</b></center> </div>')
@@ -303,20 +376,47 @@ def pagarproductos() -> 'html':
         clave=str(request.form['clave'])
         cpro = cantidadcarrito(cedula)
         tot=float(subtotal)*0.12
-        total=float(subtotal)+tot
+        total=round(float(subtotal)+tot,2)
+        fecha = datetime.now()
+        fechas = fecha.date()
 
         if tarjet=="" or mes=="" or anio=="" or clave=="":
+            # metrica de numero de errores###
+
+            er = int(session['nerrores'])
+            session['nerrores'] = er + 1
+
+            ####
+
             flash(
                 '<div class="alert alert-danger" role="alert"> <center><b> Estimado Cliente por favor verifique que todos los campos de su tarjeta hayan sidos completados.</b></center> </div>')
             return redirect(url_for('vcarritocompra'))
         else:
-            ingresar=factura(cedula,cpro,subtotal,total)
+            ingresar=factura(cedula,cpro,subtotal,total,fechas)
             e=carritoel(cedula)
 
 
         if ingresar == True:
-            return render_template('compra.html', titulo='Compra',val=total)
+            # ####################################metrica de eficiencia
+            ##metrica para completar una transaccion
+            times = float(session['tiempotran'])
+            timesv=round(time.time() - times)
+            session['tiempotran']=timesv
+
+            fecha = datetime.now()
+            fechas = fecha.date()
+
+            eficiencia(timesv, 1, fechas)
+            ########################################################
+            return render_template('compra.html', titulo='Compra',val=total,nomb=nom)
+
         else:
+            # metrica de numero de errores###
+
+            er = int(session['nerrores'])
+            session['nerrores'] = er + 1
+
+            ####
             flash(
                 '<div class="alert alert-danger" role="alert"> <center><b> Error al Generar su Pago </b></center> </div>')
             return redirect(url_for('vcarritocompra'))
@@ -333,7 +433,51 @@ def compraval() -> 'html':
         valores, sub = visualcarrito(cedula)
         ced = str(session['ci'])
         cpro = cantidadcarrito(ced)
+
+
         return render_template('compra.html', titulo='Compra')
+
+    else:
+        return redirect(url_for('index'))
+
+@app.route('/misfacturas')
+def misfact() -> 'html':
+    if 'username' in session:
+        usuario = session['username']
+        nom = str(session['nombre'])
+        cedula = session['ci']
+        ced = str(session['ci'])
+        fac=verfacturas(ced)
+        cpro = cantidadcarrito(ced)
+        return render_template('miscompras.html', titulo='Mis Facturas',carpro=fac,nomb=nom,cant=cpro)
+
+    else:
+        return redirect(url_for('index'))
+
+@app.route('/comunicar',methods=['POST'])
+def comunic() -> 'html':
+    if 'username' in session:
+        usuario = session['username']
+        nom = str(session['nombre'])
+        ced = str(session['ci'])
+        cpro = cantidadcarrito(ced)
+        #correo = str(request.form['corres'])
+        print("correo"+usuario)
+        mensaje = str(request.form['mensaje'])
+        print("mensaje  " + mensaje)
+        eliminar=enviarcorreo(usuario,mensaje)
+
+        if eliminar == True:
+
+            flash(
+                '<div class="alert alert-success" role="alert"> <center><b> Mensaje Enviado, Por favor revise su correo electronico</b></center> </div>')
+            return redirect("/ayuda")
+        else:
+            flash(
+                '<div class="alert alert-danger" role="alert"> <center><b> No se ha podido Enviar su mensaje</b></center> </div>')
+            return redirect("/ayuda")
+
+
 
     else:
         return redirect(url_for('index'))
@@ -344,7 +488,23 @@ def compraval() -> 'html':
 def salir() -> 'html':
     # metrica veces que el usuario accede a ayudas en linea
     ar=int(session['nayudas'])
-    print(ar)
+    #print(ar)
+
+    #metrica numero de errores en una sesion
+    er=int(session['nerrores'])
+    #print(er)
+
+    #metrica del tiempo entre paginas
+    tp=int(session['tiempop'])
+    #print(tp)
+
+    #ingreso de la metrica a la bdd
+    fecha = datetime.now()
+    fechas = fecha.date()
+
+    #paginas cerradas
+    cr=int(session['pcerradas'])
+    entendibilidad(ar,cr,er,tp,fechas)
 
 
     session.clear()

@@ -15,7 +15,7 @@
 
                     </ul>
 
-                           <a class="btn btn-outline-dark" href="/vercarrito" role="button">Carrito
+                            <a class="btn btn-outline-dark" href="/vercarrito" role="button">Carrito
                             <i class="bi-cart-fill me-1"></i><span class="badge rounded-pill bg-secondary">{{cant}}</span></a>
 
 
@@ -34,66 +34,73 @@
                 </div>
             </div>
         </nav>
-        <!-- Header-->
+
+       <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Comparación de Productos</h1>
+                    <h1 class="display-4 fw-bolder">
+                         <img src="/static/img/factura.png" class="img-fluid" width="5%">
+                        Mis Compras
+                        <img src="/static/img/factura.png" class="img-fluid" width="5%">
+
+                    </h1>
 
                 </div>
             </div>
         </header>
-
 <br>
 <br>
-
-
-
 <div class="container">
+<center>
 
-    <font size="5"><b> Por favor escoga 2 productos para realizar su comparación respectiva.</b></font>
-    <form method="POST" action="pcomparar">
-<div class="row">
-    <div class="col">
+    <table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
 
-        <center> <img src="/static/img/distribucion.png" class="img-fluid" width="15%"> </center>
-        <br>
+        <th scope="col"><center>#Factura</center></th>
+        <th scope="col">Fecha de Compra</th>
 
-        <select class="form-select" aria-label="Default select example" name="prod1">
+        <th scope="col">Número de Productos Comprados</th>
+        <th scope="col">Subtotal</th>
+        <th scope="col">Total</th>
 
-            <option selected>Escoga una Opción</option>
-            {% for t in prod %}
-            <option value="{{t.0}}">{{t.1}}</option>
+    </tr>
+  </thead>
+  <tbody>
+   {% for tc in carpro %}
+    <tr>
 
-            {% endfor %}
+      <td><center>00{{tc.0}}</center></td>
+      <td><center>{{tc.5}}</center></td>
+        <td><center>{{tc.2}}</center></td>
+        <td><center>{{tc.3}}$</center></td>
 
-        </select>
+
+        </td>
+
+        <td><center> {{tc.4}}$</center></td>
 
 
-    </div>
-    <div class="col">
-         <center> <img src="/static/img/distribucion.png" class="img-fluid" width="15%"> </center>
-        <br>
-        <select class="form-select" aria-label="Default select example" name="prod2">
+    </tr>
 
-            <option selected>Escoga una Opción</option>
-            {% for t in prod %}
-            <option value="{{t.0}}">{{t.1}}</option>
 
-            {% endfor %}
+    {% endfor %}
 
-        </select>
+  </tbody>
+</table>
 
-    </div>
-  </div>
-<br>
-<br>
-  <center><button type="submit" class="btn btn-success btn-lg">Comparar</button></center>
-</form>
+
+
+
+
+
+</center>
 
 </div>
 
 
+<center><a class="btn btn-danger btn-lg" href="/inicio" role="button">Regresar</a></center>
 
 
 <br>

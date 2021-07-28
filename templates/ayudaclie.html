@@ -38,7 +38,12 @@
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Ayuda en Linea</h1>
+                      <h1 class="display-4 fw-bolder">
+                        <img src="/static/img/scliente.png" class="img-fluid" width="5%">
+
+                        Ayuda en Linea
+                    <img src="/static/img/scliente.png" class="img-fluid" width="5%">
+                    </h1>
 
                 </div>
             </div>
@@ -51,7 +56,43 @@
 <br>
 
 
+<div class="container">
 
+    <div class="alert alert-warning" role="alert">
+  <font size="4"> <b style="color:red"> Bienvenido <b style="color:black">{{nomb}}</b> al Sistema de Ayuda en Linea por favor detalle en el campo
+    Mensaje su problema y posteriormente un asesor se comunicara con usted mediante el correo electronico registrado.
+    </b></font>
+</div>
+
+    <br>
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+
+            {% for message in messages %}
+
+                {{ message|safe }}
+
+            {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+    <br>
+
+    <form method="POST" action="comunicar">
+    <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label"><b>Correo Electronico</b></label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" value="{{correo}}" name="corres" >
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Mensaje</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="mensaje" required></textarea>
+</div>
+<br>
+        <center> <button type="submit" class="btn btn-success">Enviar</button></center>
+</form>
+
+</div>
 
 
 

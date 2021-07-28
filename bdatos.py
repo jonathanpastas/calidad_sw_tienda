@@ -124,7 +124,7 @@ def agcarrito(cedula,nite,idpro):
     try:
         sql = "INSERT INTO carro (id_producto,cedula,cantidad) values " \
           "('" + str(idpro) + "','" + str(cedula) + "','" + str(nite) + "');"
-        print(sql)
+        #print(sql)
         cursor = db.cursor()
         cursor.execute(sql)
         db.commit()
@@ -139,20 +139,24 @@ def visualcarrito(cedula):
 
     sql = "SELECT CARRO.ID_CARRITO,PRODUCTOS.NOMBREPROD,PRODUCTOS.IMAGEN,CARRO.CANTIDAD,(PRODUCTOS.PRECIO*CARRO.CANTIDAD) " \
           "AS SUBTOTAL FROM CARRO,PRODUCTOS WHERE CARRO.ID_PRODUCTO = PRODUCTOS.ID_PRODUCTO AND CARRO.CEDULA='"+str(cedula)+"';"
+    #print("visual"+sql)
     cursor = db.cursor()
     cursor.execute(sql)
     data = cursor.fetchall()
 
-    sql1 = "SELECT SUM(PRODUCTOS.PRECIO*CARRO.CANTIDAD) FROM CARRO,PRODUCTOS WHERE CARRO.ID_PRODUCTO = PRODUCTOS.ID_PRODUCTO AND CARRO.CEDULA='" + str(cedula) + "';"
+    return data
+
+def vsubtotal(cedula):
+    sql = "SELECT SUM(PRODUCTOS.PRECIO*CARRO.CANTIDAD) FROM CARRO,PRODUCTOS WHERE CARRO.ID_PRODUCTO = PRODUCTOS.ID_PRODUCTO AND CARRO.CEDULA='" + str(
+        cedula) + "';"
+
     cursor = db.cursor()
-    cursor.execute(sql1)
+    cursor.execute(sql)
     data1 = cursor.fetchall()
     for row in data1:
         stotal = row[0]
 
-
-    return data,stotal
-
+    return stotal
 
 def prodgoogle():
 
@@ -233,7 +237,7 @@ def cantidadcarrito(id):
 def eliminarcarrito(id,cedula):
     try:
         sql="delete from carro where id_carrito='"+str(id)+"' and cedula='"+str(cedula)+"';"
-        print(sql)
+        #print(sql)
         cursor = db.cursor()
         cursor.execute(sql)
         db.commit()
@@ -242,11 +246,11 @@ def eliminarcarrito(id,cedula):
         return False
 
 
-def factura(cedula,nump,subtotal,total):
+def factura(cedula,nump,subtotal,total,fecha):
 
     try:
-        sql = "INSERT INTO carro (cedula,numproductos,subtotal,total) values " \
-          "('" + str(cedula) + "','" + str(nump) + "','" + str(subtotal) + "','"+str(total)+"';"
+        sql = "INSERT INTO factura (cedula,numproductos,subtotal,total,fecha) values " \
+          "('" + str(cedula) + "','" + str(nump) + "','" + str(subtotal) + "','"+str(total)+"','"+str(fecha)+"');"
         print(sql)
         cursor = db.cursor()
         cursor.execute(sql)
@@ -266,3 +270,18 @@ def carritoel(cedula):
         return True
     except:
         return False
+
+
+def verfacturas(cedula):
+
+    sql = "SELECT * FROM FACTURA WHERE CEDULA='"+str(cedula)+"';"
+    print("visual"+sql)
+    cursor = db.cursor()
+    cursor.execute(sql)
+    data = cursor.fetchall()
+
+    return data
+
+
+#select * from factura where cedula='1234567890'
+
