@@ -1,6 +1,6 @@
 import psycopg2
 
-db = psycopg2.connect(host="localhost", database="proyecto", user="postgres", password="1234")
+db = psycopg2.connect(host=[host], database=[dbproject], user=[userbd], password=[password_bd])
 
 
 
