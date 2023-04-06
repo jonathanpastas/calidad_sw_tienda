@@ -6,11 +6,11 @@ def enviarcorreo(mensaje):
     # Reemplaza estos valores con tus credenciales de Google Mail
 
     try:
-        from_addr = 'cpruebas285@gmail.com'
-        to = 'jonathanpastas@hotmail.com'
+        from_addr = [email]
+        to = [destinatario]
         message = mensaje
-        username = 'cpruebas285@gmail.com'
-        password = '@7080uiosT'
+        username = [email_remitente]
+        password = [contrasenia_email]
         server = smtplib.SMTP('smtp.gmail.com:587')
         server.starttls()
         server.login(username, password)
