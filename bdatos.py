@@ -76,11 +76,11 @@ def listaproductosg():
 def mostrarproducto(id):
 
     sql = "select * from productos where id_producto="+id
-    #print(sql)
+
     cursor = db.cursor()
     cursor.execute(sql)
     data = cursor.fetchall()
-    #print(data)
+
 
     for row in data:
         cat = row[5]
@@ -139,7 +139,7 @@ def visualcarrito(cedula):
 
     sql = "SELECT CARRO.ID_CARRITO,PRODUCTOS.NOMBREPROD,PRODUCTOS.IMAGEN,CARRO.CANTIDAD,(PRODUCTOS.PRECIO*CARRO.CANTIDAD) " \
           "AS SUBTOTAL FROM CARRO,PRODUCTOS WHERE CARRO.ID_PRODUCTO = PRODUCTOS.ID_PRODUCTO AND CARRO.CEDULA='"+str(cedula)+"';"
-    #print("visual"+sql)
+
     cursor = db.cursor()
     cursor.execute(sql)
     data = cursor.fetchall()
@@ -237,7 +237,7 @@ def cantidadcarrito(id):
 def eliminarcarrito(id,cedula):
     try:
         sql="delete from carro where id_carrito='"+str(id)+"' and cedula='"+str(cedula)+"';"
-        #print(sql)
+  
         cursor = db.cursor()
         cursor.execute(sql)
         db.commit()
