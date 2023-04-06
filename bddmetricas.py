@@ -1,7 +1,7 @@
 
 import psycopg2
 
-db = psycopg2.connect(host="localhost", database="metricas", user="postgres", password="1234")
+db = psycopg2.connect(host=[host], database=[bdname], user=[userbd], password=[passwordbd])
 #### ingreso de metricas ####################
 
 
