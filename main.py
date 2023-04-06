@@ -6,12 +6,7 @@ import time
 from correo import *
 
 app = Flask(__name__)
-app.secret_key = 'jsp1234'
-
-##variables globales
-
-
-
+app.secret_key = [clave_secreta]
 
 ################# METODOS DONDE SE RENDERIZAN PAGINAS WEB ##################
 @app.route('/')
@@ -34,8 +29,7 @@ def ayudaclc() -> 'html':
 
 @app.route('/comunicar1',methods=['POST'])
 def correoinv()->'html':
-    #nombre = str(request.form['corres'])
-    #print("correo" + usuario)
+  
     mensaje = str(request.form['mensaje'])
     tx=mensaje
     ban=enviarcorreo(tx)
@@ -133,7 +127,7 @@ def ingreso() -> 'html':
 def paginicio() -> 'html':
     if 'username' in session:
         print("true")
-        # menu=menuopciones(str(session['perfiluser']))
+       
         usuario = session['username']
         nom = str(session['nombre'])
         ced = str(session['ci'])
@@ -162,7 +156,7 @@ def paginicio() -> 'html':
 def mostrarprod() -> 'html':
     if 'username' in session:
         print("true")
-        # menu=menuopciones(str(session['perfiluser']))
+        
         usuario = session['username']
         ced = str(session['ci'])
         cpro = cantidadcarrito(ced)
@@ -176,15 +170,14 @@ def mostrarprod() -> 'html':
 
         if  str(session['tiempop']) =="0":
             session['tiempop']=ctie
-        #print("tiempo entre cliente y producto es ",round(time.time()-times))
-        ##############################################################################
+       
         #######metrica de tiempo para completar una transaccion
 
 
 
         datpro, cat = mostrarproducto(prod)
         daca = mprodcat(cat, prod)
-        #print(datpro)
+       
 
         return render_template('producto.html', titulo="HomeSmart", nomb=nom, pr=datpro, pc=daca, cant=cpro)
 
@@ -288,7 +281,7 @@ def carritoag() -> 'html':
             er = int(session['nerrores'])
             session['nerrores'] = er + 1
 
-            ####
+         
             flash('<div class="alert alert-danger" role="alert"> <center><b> Escoga una cantidad del Producto </b></center> </div>')
             return redirect("/producto?id="+idpro)
 
@@ -307,7 +300,7 @@ def carritoag() -> 'html':
             er = int(session['nerrores'])
             session['nerrores'] = er + 1
 
-            ####
+          
 
             return redirect(url_for('vcarritocompra'))
 
@@ -461,7 +454,7 @@ def comunic() -> 'html':
         nom = str(session['nombre'])
         ced = str(session['ci'])
         cpro = cantidadcarrito(ced)
-        #correo = str(request.form['corres'])
+  
         print("correo"+usuario)
         mensaje = str(request.form['mensaje'])
         print("mensaje  " + mensaje)
@@ -488,15 +481,14 @@ def comunic() -> 'html':
 def salir() -> 'html':
     # metrica veces que el usuario accede a ayudas en linea
     ar=int(session['nayudas'])
-    #print(ar)
+  
 
     #metrica numero de errores en una sesion
     er=int(session['nerrores'])
-    #print(er)
-
+  
     #metrica del tiempo entre paginas
     tp=int(session['tiempop'])
-    #print(tp)
+   
 
     #ingreso de la metrica a la bdd
     fecha = datetime.now()
